@@ -37,10 +37,15 @@ CREATE TABLE normalized_products AS
 SELECT DISTINCT ON (product_sku) *
 FROM products
 
-**Creating a new all_sessions table with normalized data based on "fullvisitorid"**
+***Creating a new all_sessions table with normalized data based on "fullvisitorid"***
 CREATE TABLE normalized_all_sessions AS
 SELECT DISTINCT ON (fullvisitorid) *
 FROM all_sessions
+
+
+**Update NULL values in the "revenue" column with 0 in the "analytics" table**
+UPDATE analytics
+SET revenue = COALESCE(revenue, 0)
 
 
 
