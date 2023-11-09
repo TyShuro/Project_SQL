@@ -25,6 +25,7 @@ SELECT *
 FROM all_sessions
 WHERE transactionrevenue < 0
 
+
 Data Duplicates:
 Check for duplicate values on Unique identifiers
 
