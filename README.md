@@ -21,12 +21,21 @@ PART 5 Generate ERD
 
 
 ## Results
-(fill in what you discovered this data could tell you and how you used the data to answer those questions)
+Refer to Starting_with_data.md and starting_with_questions.md
 
 ## Challenges 
 Errors Importing Data
+Data Type Errors
+Query writing to import each table
+Empty Columns
+A lot of Duplicates in Unique Identifiers
 
 
 
 ## Future Goals
-(what would you do if you had more time?)
+More data visualisations to understand the data more
+Applying predictive analytics to try replace missing values
+Applying joins, and more database normalisation
+
+
+
