@@ -70,11 +70,54 @@ To identify patterns in the types (product categories) of products ordered from 
 
 [dataQ3.csv](https://github.com/TyShuro/Project_SQL/files/13311685/dataQ3.csv)
 
-Question 4: 
+Question 4: What is the top-selling product from each city/country? Can we find any pattern worthy of noting in the products sold?
 
 SQL Queries:
+To find the top-selling product from each city and country and identify any notable patterns in the products sold, i used the "product" and "all_sessions" tables. I then grouped the data by city, country, and product SKU, calculated the total quantity sold for each product in each location, and then found the product with the highest sales in each city/country combination using order by 
+
+WITH CityCountryProductSales AS (
+    SELECT
+        a.city,
+        a.country,
+	    a.v2ProductName,
+        p.productSKU AS top_selling_product,
+        SUM(p.orderedQuantity) AS total_quantity_sold
+    FROM
+        all_sessions a
+    JOIN
+        products p ON a.productSKU = p.productSKU
+    WHERE
+        p.orderedQuantity IS NOT NULL
+    GROUP BY
+        a.city,
+        a.country,
+        p.productSKU,
+	    a.v2ProductName
+)
+SELECT
+    ccp.city,
+    ccp.country,
+    ccp.top_selling_product,
+    ccp.v2ProductName,
+    ccp.total_quantity_sold
+FROM
+    CityCountryProductSales ccp
+JOIN
+    products p ON ccp.top_selling_product = p.productSKU
+WHERE
+    ccp.v2ProductName IS NOT NULL
+    AND ccp.total_quantity_sold = (
+        SELECT MAX(total_quantity_sold)
+        FROM CityCountryProductSales
+        WHERE city = ccp.city AND country = ccp.country
+    )
+	AND country != '(not set)'
+ORDER BY
+    ccp.city,
+    ccp.country
 
 Answer:
+[dataQ4.csv](https://github.com/TyShuro/Project_SQL/files/13311794/dataQ4.csv)
 
 
 
