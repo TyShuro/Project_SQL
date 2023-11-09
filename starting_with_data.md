@@ -121,8 +121,31 @@ Answer:
 
 
 
-Question 5: 
+Question 5: Can we summarize the impact of revenue generated from each city/country?
 
 SQL Queries:
 
+
+SELECT
+    a.city,
+    a.country,
+    SUM(analytics.revenue) AS total_revenue_generated
+FROM
+    all_sessions a
+JOIN
+    analytics ON a.visitId = analytics.visitId
+WHERE
+    analytics.revenue IS NOT NULL
+GROUP BY
+    a.city,
+    a.country
+ORDER BY
+    total_revenue_generated DESC
+
 Answer:
+To summarize the impact of revenue generated from each city/country I joined the "analytics" and "all_sessions" tables, and then calculated the total revenue for each city and country combination. 
+
+[dataQ5.csv](https://github.com/TyShuro/Project_SQL/files/13311871/dataQ5.csv)
+
+
+
